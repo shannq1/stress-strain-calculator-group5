@@ -46,6 +46,21 @@ def select_material():
             print("Invalid choice. Please enter 1, 2, 3, or 4.")
 
 
+def analyze_safety(stress_mpa, yield_strength):
+    factor_of_safety = yield_strength / stress_mpa
+
+    print()
+    print("Safety Analysis:")
+    print(f"Factor of safety: {factor_of_safety:.2f}")
+
+    if factor_of_safety >= 2:
+        print("SAFE - Material can handle this load comfortably.")
+    elif factor_of_safety >= 1:
+        print("CAUTION - Material is close to yield strength.")
+    else:
+        print("FAIL - Stress exceeds yield strength. Material will likely deform or break.")
+
+
 def main():
 
     print("==Stress and Strain Calculator==")
@@ -66,10 +81,12 @@ def main():
     print("Results:")
     print()
     print(f"Stress: {stress:.2f} Pa")
-    print(f"Strain: {strain:.2f} (dimensionless)")
+    print(f"Strain: {strain:.5f} (dimensionless)")
     print()
     stress_mpa = stress / 1000000
     print(f"Stress in MPa: {stress_mpa:.2f} MPa")
+
+    analyze_safety(stress_mpa, material["yield_strength"])
 
 
 if __name__ == "__main__":
