@@ -61,11 +61,7 @@ def analyze_safety(stress_mpa, yield_strength):
         print("FAIL - Stress exceeds yield strength. Material will likely deform or break.")
 
 
-def main():
-
-    print("==Stress and Strain Calculator==")
-    print()
-
+def run_calculation():
     material = select_material()
     print()
 
@@ -87,6 +83,22 @@ def main():
     print(f"Stress in MPa: {stress_mpa:.2f} MPa")
 
     analyze_safety(stress_mpa, material["yield_strength"])
+
+
+def main():
+
+    print("==Stress and Strain Calculator==")
+
+    while True:
+        print()
+        run_calculation()
+
+        print()
+        again = input("Perform another calculation? (y/n): ").strip().lower()
+        if again != "y":
+            print()
+            print("Thank you for using Group 5's Stress and Strain Calculator!")
+            break
 
 
 if __name__ == "__main__":
