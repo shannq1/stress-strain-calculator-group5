@@ -106,9 +106,21 @@ def main():
         print()
         run_calculation()
 
-        print()
-        again = input("Perform another calculation? (y/n): ").strip().lower()
-        if again != "y":
+    print()
+    print("Calculation History:")
+    if not history:
+        print("No calculations were performed.")
+    else:
+        for i, record in enumerate(history, start=1):
+            print(f"Calculation {i}:")
+            print(f"  Material: {record['material']}")
+            print(f"  Force: {record['force']} N")
+            print(f"  Area: {record['area']} m^2")
+            print(f"  Original Length: {record['original_length']} m")
+            print(f"  Change in Length: {record['change_in_length']} m")
+            print(f"  Stress: {record['stress']:.2f} Pa ({record['stress_mpa']:.2f} MPa)")
+            print(f"  Strain: {record['strain']:.5f}")
+            print(f"  Factor of Safety: {record['factor_of_safety']:.2f}")
             print()
             print("Thank you for using Group 5's Stress and Strain Calculator!")
             break
