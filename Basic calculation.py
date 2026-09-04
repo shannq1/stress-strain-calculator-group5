@@ -12,9 +12,46 @@ def get_valid_number(prompt, allow_zero=False):
             print("Please enter a valid number.")
 
 
+def select_material():
+    materials = {
+        "1": {"name": "Steel", "yield_strength": 250, "youngs_modulus": 200},
+        "2": {"name": "Aluminum", "yield_strength": 95, "youngs_modulus": 69},
+        "3": {"name": "Titanium", "yield_strength": 880, "youngs_modulus": 114},
+    }
+
+    print("Select a material:")
+    print("1. Steel")
+    print("2. Aluminum")
+    print("3. Titanium")
+    print("4. Custom")
+
+    while True:
+        choice = input("Enter choice (1-4): ")
+
+        if choice in materials:
+            selected = materials[choice]
+            print()
+            print(f"Selected: {selected['name']}")
+            print(f"Yield strength: {selected['yield_strength']} MPa")
+            print(f"Young's modulus: {selected['youngs_modulus']} GPa")
+            return selected
+
+        elif choice == "4":
+            name = input("Enter custom material name: ")
+            yield_strength = get_valid_number("Enter yield strength (in MPa): ")
+            youngs_modulus = get_valid_number("Enter Young's modulus (in GPa): ")
+            return {"name": name, "yield_strength": yield_strength, "youngs_modulus": youngs_modulus}
+
+        else:
+            print("Invalid choice. Please enter 1, 2, 3, or 4.")
+
+
 def main():
 
     print("==Stress and Strain Calculator==")
+    print()
+
+    material = select_material()
     print()
 
     force = get_valid_number("Enter the force applied (in Newtons): ")
