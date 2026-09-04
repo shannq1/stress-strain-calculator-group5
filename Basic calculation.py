@@ -104,7 +104,26 @@ def main():
 
     while True:
         print()
-        run_calculation()
+        choice = input("Press Enter to run a calculator, or type 'q' to quit and see your summary: ").strip().lower()
+        if choice == 'q':
+            break
+
+        try:
+            record = run_calculation(units)
+            history.append(record)
+            materials_tested.add(record["material"])
+
+        except ValueError:
+            print("Error: Invalid input. Please enter numeric values.")
+        except ZeroDivisionError:
+            print("Error: Area and original length cannot be zero!")
+        except KeyError:
+            print("Error: Material not found in database!")
+
+    print()
+    print("=== Session Summary ===")
+    print(f"Total calculations performed: {len(history)}")
+    print(f"Unique materials tested: {', '.join(materials_tested) if materials_tested else 'None'}")
 
     print()
     print("Calculation History:")
