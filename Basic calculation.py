@@ -19,6 +19,11 @@ def main():
     print()
     stress_mpa = stress / 1000000
     print(f"Stress in MPa: {stress_mpa:.2f} MPa")
+    print()
+    print("==Analysis Complete==")
+
+    if __name__ == "__main__":
+        main()
 
 
 
