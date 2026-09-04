@@ -86,6 +86,7 @@ def run_calculation():
 
 
 def main():
+    #Main function for the stress and strain calculator with data structures.
 
     print("==Stress and Strain Calculator==")
 
