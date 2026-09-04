@@ -60,6 +60,7 @@ def analyze_safety(stress_mpa, yield_strength):
     else:
         print("FAIL - Stress exceeds yield strength. Material will likely deform or break.")
 
+    return factor_of_safety
 
 def run_calculation():
     material = select_material()
