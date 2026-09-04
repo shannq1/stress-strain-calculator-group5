@@ -84,6 +84,17 @@ def run_calculation():
 
     analyze_safety(stress_mpa, material["yield_strength"])
 
+    return {
+        "material": material["name"],
+        "force": force,
+        "area": area,
+        "original_length": original_length,
+        "change_in_length": change_in_length,
+        "stress": stress,
+        "stress_mpa": stress_mpa,
+        "strain": strain,
+        "factor_of_safety": analyze_safety(stress_mpa, material["yield_strength"])
+    }
 
 def main():
     #Main function for the stress and strain calculator with data structures.
