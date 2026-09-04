@@ -122,8 +122,28 @@ def main():
             print(f"  Strain: {record['strain']:.5f}")
             print(f"  Factor of Safety: {record['factor_of_safety']:.2f}")
             print()
-            print("Thank you for using Group 5's Stress and Strain Calculator!")
-            break
+
+    if history:
+        stresses = [record['stress_mpa'] for record in history]
+        fos_values = [record['factor_of_safety'] for record in history]
+        strains = [record['strain'] for record in history]
+
+        print()
+        print("=== Statistics ===")
+        print(f"Highest stress: {max(stresses):.2f} MPa")
+        print(f"Lowest factor of safety: {min(fos_values):.2f}")
+        print(f"Average strain: {sum(strains)/len(strains):.5f}")
+
+        counts = {name: 0 for name in materials_tested}
+        for r in history:
+            counts[r['material']] += 1
+
+        print("Material test counts:")
+        for name, count in counts.items():
+            print(f"  {name}: {count} test(s)")
+
+        print()
+        print("Thank you for using the Stress and Strain Calculator. Goodbye!")
 
 
 if __name__ == "__main__":
