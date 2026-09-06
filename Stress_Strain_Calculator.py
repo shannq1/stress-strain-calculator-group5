@@ -11,6 +11,20 @@ def main():
 
     while True:
         print()
+        choice = input("Press Enter to run a calculator, 'r' for a random test, or 'q' to quit and see your summary: ").strip().lower()
+        if choice == 'q':
+            break
+ 
+        try:
+            if choice == 'r':
+                test = session.run_random_calculation()
+            else:
+                test = session.run_calculation()
+            session.history.append(test)
+            session.materials_tested.add(test.material.name)
+
+    while True:
+        print()
         choice = input("Press Enter to run a calculator, or type 'q' to quit and see your summary: ").strip().lower()
         if choice == 'q':
             break
