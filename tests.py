@@ -2,7 +2,6 @@ import unittest
 from material import Material
 from properties import StressStrainTest
 from database import CalculatorSession, TestRecord
-import unittest
 
 try:
     from material import Material
