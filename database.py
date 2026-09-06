@@ -15,3 +15,25 @@ class TestRecord:
             "material": self.material
         }
       
+class CalculatorSession:
+    """Manages calculation history and session statistics."""
+    def __init__(self):
+        self.history = []
+
+    def add_test_result(self, result_data: dict):
+        """Appends a test result dictionary to the session history."""
+        self.history.append(result_data)
+
+    def get_highest_stress(self) -> float:
+        """Calculates the highest stress value recorded in the session."""
+        if not self.history:
+            return 0.0
+        return max(record.get("stress", 0.0) for record in self.history)
+
+    def get_average_strain(self) -> float:
+        """Calculates the average strain across all tests in the session."""
+        if not self.history:
+            return 0.0
+        total_strain = sum(record.get("strain", 0.0) for record in self.history)
+        return total_strain / len(self.history)
+
