@@ -191,6 +191,21 @@ class ResultExporter:
         with open(filename, "w") as f:
             json.dump(records, f, indent=2)
         print(f"Saved {len(records)} result(s) to {filename}")
+    
+    @staticmethod
+    def to_csv(history: List[StressStrainTest], filename: str = "results.csv"):
+        if not history:
+            print("No results to save.")
+            return
+ 
+        records = [test.to_dict() for test in history]
+        fieldnames = list(records[0].keys())
+ 
+        with open(filename, "w", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(records)
+        print(f"Saved {len(records)} result(s) to {filename}")
 
 
 class CalculatorSession:
