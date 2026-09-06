@@ -71,3 +71,6 @@ class TestCalculatorSession(unittest.TestCase):
         session.add_test_result({"test_id": 1, "stress": 200.0, "strain": 0.01})
         self.assertEqual(len(session.history), 1)
         self.assertEqual(session.history[0]["stress"], 200.0)
+
+if __name__ == "__main__":
+    unittest.main()
