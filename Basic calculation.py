@@ -83,3 +83,18 @@ class MaterialManager:
             else:
                 print("Invalid choice. Please enter 1, 2, 3, or 4.")
 
+class StressStrainTest:
+
+    def __init__(self, material: Material, force: float, area: float, 
+                 original_length: float, change_in_length: float):
+        if area <= 0:
+            raise ValueError("Cross-sectional area must be greater than zero.")
+        if original_length <= 0:
+            raise ValueError("Original length must be greater than zero.")
+
+        self._material = material
+        self._force = force
+        self._area = area
+        self._original_length = original_length
+        self._change_in_length = change_in_length
+
