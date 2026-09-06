@@ -76,3 +76,29 @@ def display_summary(history: list, unique_materials: set):
         print("\n=== Statistics ===")
         print(f"Highest stress: {max(stresses):.2f} MPa")
         print(f"Lowest factor of safety: {min(fos_values):.2f}")
+        
+def run_calculation_record(units: tuple) -> dict:
+    force_unit, area_unit, length_unit = units
+    material = select_material()
+    
+    force = get_valid_number(f"\nEnter the force applied (in {force_unit}): ")
+    area = get_valid_number(f"Enter the cross-sectional area (in {area_unit}): ")
+    original_length = get_valid_number(f"Enter the original length (in {length_unit}): ")
+    change_in_length = get_valid_number(f"Enter the change in length (in {length_unit}): ", allow_zero=True)
+    
+    stress_pa = calculate_stress(force, area)
+    strain = calculate_strain(change_in_length, original_length)
+    stress_mpa = stress_pa / 1_000_000
+    fos = calculate_factor_of_safety(material["yield_strength"], stress_mpa)
+    
+    print(f"\nResults:\nStress: {stress_pa:.2f} Pa ({stress_mpa:.2f} MPa)")
+    print(f"Strain: {strain:.5f} (dimensionless)")
+    display_safety_analysis(fos)
+    
+    return {
+        "material": material["name"],
+        "force": force, "area": area,
+        "stress_mpa": stress_mpa, "strain": strain,
+        "factor_of_safety": fos
+    }
+
