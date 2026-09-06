@@ -30,3 +30,10 @@ def get_valid_number(prompt: str, allow_zero: bool = False) -> float:
                 return value #[cite: 1, 3]
         except ValueError:
             print("Please enter a valid number.") 
+
+def manage_materials() -> dict:
+    return {
+        "1": {"name": "Steel", "yield_strength": 250, "youngs_modulus": 200},
+        "2": {"name": "Aluminum", "yield_strength": 95, "youngs_modulus": 69},
+        "3": {"name": "Titanium", "yield_strength": 880, "youngs_modulus": 114},
+        }
