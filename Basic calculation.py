@@ -47,3 +47,39 @@ class InputValidator:
             except ValueError:
                 print("Please enter a valid number.")
 
+class MaterialManager:
+
+    def __init__(self):
+        self._materials: Dict[str, Material] = {
+            "1": Metal("Steel", 250, 200),
+            "2": Metal("Aluminum", 95, 69),
+            "3": Metal("Titanium", 880, 114),
+        }
+
+    def select_material(self) -> Material:
+        print("Select a material:")
+        print("1. Steel")
+        print("2. Aluminum")
+        print("3. Titanium")
+        print("4. Custom")
+
+        while True:
+            choice = input("Enter choice (1-4): ")
+
+            if choice in self._materials:
+                selected = self._materials[choice]
+                print()
+                print(f"Selected: {selected.name}")
+                print(f"Yield strength: {selected.yield_strength} MPa")
+                print(f"Young's modulus: {selected.youngs_modulus} GPa")
+                return selected
+
+            elif choice == "4":
+                name = input("Enter custom material name: ")
+                yield_strength = InputValidator.get_valid_number("Enter yield strength (in MPa): ")
+                youngs_modulus = InputValidator.get_valid_number("Enter Young's modulus (in GPa): ")
+                return Composite(name, yield_strength, youngs_modulus)
+
+            else:
+                print("Invalid choice. Please enter 1, 2, 3, or 4.")
+
