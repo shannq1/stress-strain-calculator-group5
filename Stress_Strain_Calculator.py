@@ -169,10 +169,13 @@ class StressStrainTest:
     def to_dict(self) -> dict:
         return {
             "material": self.material.name,
-            "force": self.force,
-            "area": self.area,
-            "original_length": self.original_length,
-            "change_in_length": self.change_in_length,
+            "material_category":self.material.category(),
+            "yield_strenght_mpa":self.material.yield_strength,
+            "youngs_modulus_gpa": self.material.youngs_modulus,
+            "force_n": self.force,
+            "area_m2": self.area,
+            "original_length_m": self.original_length,
+            "change_in_length_m": self.change_in_length,
             "stress": self.stress,
             "stress_mpa": self.stress_mpa,
             "strain": self.strain,
