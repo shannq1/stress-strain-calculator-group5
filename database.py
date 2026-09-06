@@ -25,14 +25,14 @@ class CalculatorSession:
     """Manages calculation history and session statistics."""
     def __init__(self):
         self.history = []
-        self.materials_tested = set()  # Supports session.materials_tested in main.py
+        self.materials_tested = set()
 
     def add_test_result(self, result_data: dict):
         """Appends a test result dictionary to the session history."""
         self.history.append(result_data)
 
     def run_calculation(self) -> StressStrainTest:
-        """Prompts for input, performs calculations, and returns a test object for main.py."""
+        """Prompts for user input, runs stress/strain calculation, and returns the result."""
         print("\n--- New Calculation ---")
         material_name = input("Enter material name (Steel, Aluminum, Titanium): ").strip()
 
@@ -99,7 +99,7 @@ class CalculatorSession:
         return min(safety_factors) if safety_factors else 0.0
 
     def display_summary(self):
-        """Displays formatted session summary statistics for main.py."""
+        """Displays formatted session summary statistics."""
         print("\n" + "=" * 30)
         print("      SESSION SUMMARY      ")
         print("=" * 30)
