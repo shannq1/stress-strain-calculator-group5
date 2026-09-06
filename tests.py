@@ -52,3 +52,22 @@ class TestStressStrainTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             test_obj = StressStrainTest(force=10000.0, area=0.0, change_in_length=0.02, original_length=2.0)
             test_obj.calculate_stress()
+            
+try:
+    from database import CalculatorSession
+except ImportError:
+    import importlib
+    calc = importlib.import_module("Basic calculation")
+    CalculatorSession = getattr(calc, "CalculatorSession", None)
+
+
+class TestCalculatorSession(unittest.TestCase):
+
+    def test_session_history_logging(self):
+        """Verify history tracking inside session object."""
+        if CalculatorSession is None:
+            self.skipTest("CalculatorSession class not found")
+        session = CalculatorSession()
+        session.add_test_result({"test_id": 1, "stress": 200.0, "strain": 0.01})
+        self.assertEqual(len(session.history), 1)
+        self.assertEqual(session.history[0]["stress"], 200.0)
