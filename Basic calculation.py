@@ -53,3 +53,13 @@ def select_material() -> dict:
                 "youngs_modulus": get_valid_number("Enter Young's modulus (in GPa): ") 
             }
         print("Invalid choice. Please enter 1, 2, 3, or 4.") 
+        
+        
+def display_safety_analysis(factor_of_safety: float):
+    print(f"\nSafety Analysis:\nFactor of safety: {factor_of_safety:.2f}") 
+    if factor_of_safety >= 2:
+        print("SAFE - Material can handle this load comfortably.") 
+    elif factor_of_safety >= 1:
+        print("CAUTION - Material is close to yield strength.") 
+    else:
+        print("FAIL - Stress exceeds yield strength. Material will likely deform or break.") 
