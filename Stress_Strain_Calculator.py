@@ -1,5 +1,6 @@
 import json
 import csv
+import os
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from datetime import datetime
@@ -186,19 +187,34 @@ class StressStrainTest:
         }
 
 
-class ResultExporter:
-    
+class exporter:
+ 
+    @staticmethod
+    def _confirm_overwrite(filename: str) -> bool:
+        if os.path.exists(filename):
+            answer = input(f"{filename} already exists. Overwrite? (y/n): ").strip().lower()
+            return answer == "y"
+        return True
+ 
     @staticmethod
     def to_json(history: List[StressStrainTest], filename: str = "results.json"):
+        if not exporter._confirm_overwrite(filename):
+            print("Skipped saving JSON.")
+            return
+ 
         records = [test.to_dict() for test in history]
         with open(filename, "w") as f:
             json.dump(records, f, indent=2)
         print(f"Saved {len(records)} result(s) to {filename}")
-    
+ 
     @staticmethod
     def to_csv(history: List[StressStrainTest], filename: str = "results.csv"):
         if not history:
             print("No results to save.")
+            return
+ 
+        if not exporter._confirm_overwrite(filename):
+            print("Skipped saving CSV.")
             return
  
         records = [test.to_dict() for test in history]
