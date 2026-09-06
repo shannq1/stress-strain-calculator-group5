@@ -17,3 +17,16 @@ def calculate_factor_of_safety(yield_strength_mpa: float, stress_mpa: float) -> 
     if stress_mpa == 0:
         return float('inf')
     return yield_strength_mpa / stress_mpa
+
+def get_valid_number(prompt: str, allow_zero: bool = False) -> float:
+    while True:
+        try:
+            value = float(input(prompt))
+            if value < 0:
+                print("Value cannot be negative. Please try again.") 
+            elif value == 0 and not allow_zero:
+                print("Value cannot be zero. Please try again.") 
+            else:
+                return value #[cite: 1, 3]
+        except ValueError:
+            print("Please enter a valid number.") 
