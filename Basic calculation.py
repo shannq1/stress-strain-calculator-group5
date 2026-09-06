@@ -37,3 +37,19 @@ def manage_materials() -> dict:
         "2": {"name": "Aluminum", "yield_strength": 95, "youngs_modulus": 69},
         "3": {"name": "Titanium", "yield_strength": 880, "youngs_modulus": 114},
         }
+
+def select_material() -> dict:
+    materials = manage_materials()
+    print("\nSelect a material:\n1. Steel\n2. Aluminum\n3. Titanium\n4. Custom")
+    
+    while True:
+        choice = input("Enter choice (1-4): ") 
+        if choice in materials:
+            return materials[choice]
+        elif choice == "4":
+            return {
+                "name": input("Enter custom material name: "), 
+                "yield_strength": get_valid_number("Enter yield strength (in MPa): "), 
+                "youngs_modulus": get_valid_number("Enter Young's modulus (in GPa): ") 
+            }
+        print("Invalid choice. Please enter 1, 2, 3, or 4.") 
