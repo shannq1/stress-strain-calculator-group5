@@ -63,3 +63,16 @@ def display_safety_analysis(factor_of_safety: float):
         print("CAUTION - Material is close to yield strength.") 
     else:
         print("FAIL - Stress exceeds yield strength. Material will likely deform or break.") 
+
+def display_summary(history: list, unique_materials: set):
+    print("\n=== Session Summary ===")
+    print(f"Total calculations performed: {len(history)}")
+    print(f"Unique materials tested: {', '.join(unique_materials) if unique_materials else 'None'}")
+    
+    if history:
+        stresses = [r['stress_mpa'] for r in history]
+        fos_values = [r['factor_of_safety'] for r in history]
+        
+        print("\n=== Statistics ===")
+        print(f"Highest stress: {max(stresses):.2f} MPa")
+        print(f"Lowest factor of safety: {min(fos_values):.2f}")
