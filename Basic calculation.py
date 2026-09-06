@@ -102,3 +102,24 @@ def run_calculation_record(units: tuple) -> dict:
         "factor_of_safety": fos
     }
 
+def main():
+    print("==Stress and Strain Calculator==") 
+    units = ("Newtons", "square meters", "meters")
+    history = []
+    materials_tested = set()
+    
+    while True:
+        choice = input("\nPress Enter to run a calculator, or type 'q' to quit: ").strip().lower() #[cite: 3]
+        if choice == 'q': 
+            break 
+        try:
+            record = run_calculation_record(units)
+            history.append(record)
+            materials_tested.add(record["material"])
+        except ValueError as e:
+            print(f"Error: {e}")
+            
+    display_summary(history, materials_tested)
+
+if __name__ == "__main__":
+    main()
