@@ -229,21 +229,35 @@ class exporter:
 
 
 class CalculatorSession:
-
+ 
     def __init__(self):
         self.history: List[StressStrainTest] = []
         self.materials_tested: Set[str] = set()
         self.material_manager = MaterialManager()
-
+ 
     def run_calculation(self) -> StressStrainTest:
         material = self.material_manager.select_material()
         print()
-
+ 
         force = InputValidator.get_valid_number("Enter the force applied (in Newtons): ")
         area = InputValidator.get_valid_number("Enter the cross-sectional area (in square meters): ")
         original_length = InputValidator.get_valid_number("Enter the original length of the material (in meters): ")
         change_in_length = InputValidator.get_valid_number("Enter the change in length of the material (in meters): ", allow_zero=True)
-
+ 
+        test = StressStrainTest(material, force, area, original_length, change_in_length)
+        test.display_results()
+        return test
+ 
+    def run_random_calculation(self) -> StressStrainTest:
+        material = random.choice(list(self.material_manager._materials.values()))
+        force = random.uniform(100, 10000)
+        area = random.uniform(0.001, 0.05)
+        original_length = random.uniform(0.1, 5)
+        change_in_length = random.uniform(0, 0.05)
+ 
+        print()
+        print(f"Randomly selected material: {material.name}")
+ 
         test = StressStrainTest(material, force, area, original_length, change_in_length)
         test.display_results()
         return test
@@ -295,6 +309,20 @@ class CalculatorSession:
 def main():
     print("==Stress and Strain Calculator==")
     session = CalculatorSession()
+
+    while True:
+        print()
+        choice = input("Press Enter to run a calculator, 'r' for a random test, or 'q' to quit and see your summary: ").strip().lower()
+        if choice == 'q':
+            break
+ 
+        try:
+            if choice == 'r':
+                test = session.run_random_calculation()
+            else:
+                test = session.run_calculation()
+            session.history.append(test)
+            session.materials_tested.add(test.material.name)
 
     while True:
         print()
