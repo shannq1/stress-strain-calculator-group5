@@ -2,6 +2,7 @@ import json
 import csv
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Dict, List, Set, Tuple
 
 
@@ -102,6 +103,7 @@ class StressStrainTest:
         self._area = area
         self._original_length = original_length
         self._change_in_length = change_in_length
+        self._timestamp = datetime.now().isoformat(timespec="seconds")
 
     @property
     def material(self) -> Material:
@@ -168,6 +170,7 @@ class StressStrainTest:
 
     def to_dict(self) -> dict:
         return {
+            "timestamp": self._timestamp,
             "material": self.material.name,
             "material_category":self.material.category(),
             "yield_strenght_mpa":self.material.yield_strength,
