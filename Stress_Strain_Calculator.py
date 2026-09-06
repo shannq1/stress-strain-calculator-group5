@@ -183,6 +183,16 @@ class StressStrainTest:
         }
 
 
+class ResultExporter:
+    
+    @staticmethod
+    def to_json(history: List[StressStrainTest], filename: str = "results.json"):
+        records = [test.to_dict() for test in history]
+        with open(filename, "w") as f:
+            json.dump(records, f, indent=2)
+        print(f"Saved {len(records)} result(s) to {filename}")
+
+
 class CalculatorSession:
 
     def __init__(self):
