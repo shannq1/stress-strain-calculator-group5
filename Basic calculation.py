@@ -31,3 +31,19 @@ class Composite(Material):
     def category(self) -> str:
         return "Composite"
 
+class InputValidator:
+
+    @staticmethod
+    def get_valid_number(prompt: str, allow_zero: bool = False) -> float:
+        while True:
+            try:
+                value = float(input(prompt))
+                if value < 0:
+                    print("Value cannot be negative. Please try again.")
+                elif value == 0 and not allow_zero:
+                    print("Value cannot be zero. Please try again.")
+                else:
+                    return value
+            except ValueError:
+                print("Please enter a valid number.")
+
