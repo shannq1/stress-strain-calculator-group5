@@ -14,9 +14,13 @@ summary statistics.
 | Member | Primary Responsibility |
 
 Marc Ira Irabagon | Task 1 – Basic Calculations 
+
 Philip Shan Gallego | Task 2 – Control Structures and Validation 
+
 Abdullaziz Macalalad | Task 3 – Data Structures 
+
 Arwin Abad | Task 4 – Functions and Parameters 
+
 Gabriel Ponce Agmata | Task 5 – Object-Oriented Programming 
 
 **Task 6 – Modular Integration** was completed collaboratively by all five members.
@@ -35,4 +39,27 @@ Gabriel Ponce Agmata | Task 5 – Object-Oriented Programming
 - Python 3.10 or higher (uses dataclasses, type hints, and abstract base classes)
 - No external/third-party packages required, uses only the Python standard library
 
+## How to Run
 
+1. Open a terminal or command prompt and navigate to the project's root directory.
+2. Execute the main application file using Python: python main.py
+3. Follow the interactive command-line menu to input your test measurements, select materials, and view the calculated stress, strain, and safety margins.
+
+## Repository Structure
+
+- main.py: The primary entry point containing the interactive user loop and menu navigation.
+- material.py: Contains the object-oriented definitions, including the core Material class.
+- properties.py: Houses the engineering calculations, including the StressStrainTest class logic.
+- database.py: Manages the CalculatorSession class to track test history and compute session statistics.
+- utils.py: Provides helper tools and validation functions to handle user input errors safely.
+- tests.py: The comprehensive unit test suite used to verify the program's classes and calculations.
+
+## Testing Requirements
+
+The system relies entirely on Python's built-in unittest framework, meaning no external 
+dependencies are required to validate the code. You can execute the full suite by running 
+python tests.py in your terminal.
+
+- TestMaterial: Validates the proper initialization of material objects and ensures all core attributes are accurately assigned.
+- TestStressStrainTest: Confirms the mathematical precision of the stress and strain formulas while verifying that invalid inputs, such as a zero-value area, correctly trigger a ValueError.
+- TestCalculatorSession: Checks that the session history accurately logs individual test results and successfully retains multiple calculation records over time.
